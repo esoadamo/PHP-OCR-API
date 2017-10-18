@@ -19,6 +19,27 @@ function get_nonexisting_file($folder, $extension, $create){
 			if ($create)
 				file_put_contents($filepath, "");
 			return $filepath;
+		}<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	
+function get_nonexisting_file($folder, $extension, $create){
+	/*
+	Generates unique filename that does not exist yet
+	:param folder: folder in which generate the filename
+	:param extension: extension of the generated filename, can be blank
+	:param create: if set to true, the new blank file is created
+	:return: absolute file path
+	*/
+	$folder = realpath($folder);
+	$i = 0;
+	while (true){
+		$hex = dechex($i);
+		$filepath = ("{$folder}/{$hex}{$extension}");
+		if (!file_exists($filepath)){
+			if ($create)
+				file_put_contents($filepath, "");
+			return $filepath;
 		}
 		$i++;
 	}
@@ -41,7 +62,7 @@ die();
 <html>
 <head>
 <title>OCR Online</title>
-<meta charset="UTF-8">  
+<meta charset="UTF-8"> 
 </head>
 <body>
 <h1 id="title">Free online OCR</h1>
@@ -51,6 +72,7 @@ die();
 	<p style="display: inline;" id="p_language">Language:</p> 
 	<select id="select_lang" onchange="reloadLang()" name="lang">
 		<option value="eng">ENG</option>
+		<option value="ces">CZ</option>
 	</select><br>
     <input id="btn_submit" type="submit" value="Upload Image" name="submit">
 </form>
@@ -63,6 +85,12 @@ let select_lang = document.getElementById("select_lang");
 
 function reloadLang(){
 	switch(select_lang.value){
+		case "ces":
+			title.innerHTML = "Online rozpoznávání textu";
+			p_language.innerHTML = "Jazyk: ";
+			p_select_img.innerHTML = "Vyberte soubor obrázku: ";
+			btn_submit.value = "Provést rozpoznání textu";
+			break;
 		default:
 			title.innerHTML = "Free online OCR";
 			p_language.innerHTML = "Language: ";
@@ -73,6 +101,9 @@ function reloadLang(){
 }
 
 switch(navigator.language || navigator.userLanguage){
+	case "cs":
+		select_lang.value = "ces";
+		break;
 	default:
 		select_lang.value = "eng";
 		break;
