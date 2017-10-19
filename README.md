@@ -1,4 +1,15 @@
-# PHP-OCR-API
-Online API for tesseract-ocr
+# PHP OCR API
+*API for tesseract-ocr in PHP with HTML GUI*
 
 With this you can easily implement your OCR in any application, just send the image file and the respond will be the recognized text
+
+## API
+
+To perform direct API query call the script using HTTP POST with this parameters:
+
+- `image` - the uploaded image file, source for the OCR
+- `lang` - optional, defaults to `eng`. This value is passed directly to the `tesseract-ocr` command as `-l` argument
+
+## GUI
+
+this script returns very basic HTML/JS GUI if called with HTTP GET
