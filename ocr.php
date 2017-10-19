@@ -51,7 +51,7 @@ die();
 	<select id="select_lang" onchange="reloadLang()" name="lang">
 		<option value="eng">ENG</option>
 		<option value="ces">CZ</option>
-		<option value="ger">DE</option>
+		<option value="deu">DE</option>
 	</select><br>
     <input id="btn_submit" type="submit" value="Upload Image" name="submit">
 </form>
@@ -64,7 +64,7 @@ let select_lang = document.getElementById("select_lang");
 
 function reloadLang(){
 	switch(select_lang.value){
-		case "ger":
+		case "deu":
 			title.innerHTML = "Online Texterkennung";
 			p_language.innerHTML = "Sprache: ";
 			p_select_img.innerHTML = "Bild auswählen: ";
@@ -87,7 +87,7 @@ function reloadLang(){
 
 switch(navigator.language || navigator.userLanguage){
 	case "de":
-		select_lang.value = "ger";
+		select_lang.value = "deu";
 		break;
 	case "cs":
 		select_lang.value = "ces";
