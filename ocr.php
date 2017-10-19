@@ -1,28 +1,6 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	
-function get_nonexisting_file($folder, $extension, $create){
-	/*
-	Generates unique filename that does not exist yet
-	:param folder: folder in which generate the filename
-	:param extension: extension of the generated filename, can be blank
-	:param create: if set to true, the new blank file is created
-	:return: absolute file path
-	*/
-	$folder = realpath($folder);
-	$i = 0;
-	while (true){
-		$hex = dechex($i);
-		$filepath = ("{$folder}/{$hex}{$extension}");
-		if (!file_exists($filepath)){
-			if ($create)
-				file_put_contents($filepath, "");
-			return $filepath;
-		}<?php
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	
 function get_nonexisting_file($folder, $extension, $create){
 	/*
 	Generates unique filename that does not exist yet
@@ -62,14 +40,14 @@ die();
 <html>
 <head>
 <title>OCR Online</title>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 </head>
 <body>
 <h1 id="title">Free online OCR</h1>
 <form method="post" enctype="multipart/form-data">
     <p id="p_select_img" style="display: inline;">Select image to upload: </p>
     <input type="file" name="image" id="image"><br>
-	<p style="display: inline;" id="p_language">Language:</p> 
+	<p style="display: inline;" id="p_language">Language:</p>
 	<select id="select_lang" onchange="reloadLang()" name="lang">
 		<option value="eng">ENG</option>
 		<option value="ces">CZ</option>
