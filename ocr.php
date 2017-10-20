@@ -38,75 +38,128 @@ die();
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-<title>OCR Online</title>
-<meta charset="UTF-8">
-</head>
-<body>
-<h1 id="title">Free online OCR</h1>
-<form method="post" enctype="multipart/form-data">
-    <p id="p_select_img" style="display: inline;">Select image to upload: </p>
-    <input type="file" name="image" id="image"><br>
-	<p style="display: inline;" id="p_language">Language:</p>
-	<select id="select_lang" onchange="reloadLang()" name="lang">
-		<option value="eng">ENG</option>
-		<option value="ces">CZ</option>
-		<option value="deu">DE</option>
-		<option value="rus">RU</option>
-	</select><br>
-    <input id="btn_submit" type="submit" value="Upload Image" name="submit">
-</form>
-<script>
-let title = document.getElementById("title");
-let p_select_img = document.getElementById("p_select_img");
-let p_language = document.getElementById("p_language");
-let btn_submit = document.getElementById("btn_submit");
-let select_lang = document.getElementById("select_lang");
+	<head>
+		<title>OCR Online</title>
+		<meta charset="UTF-8">
+		<style>
+			@import url('https://fonts.googleapis.com/css?family=Lato');
+			* {
+				box-sizing: border-box;
+				font-family: 'Lato', sans-serif;
+			}
 
-function reloadLang(){
-	switch(select_lang.value){
-		case "rus":
-			title.innerHTML = "Онлайн распознавание текста";
-			p_language.innerHTML = "Язык: ";
-			p_select_img.innerHTML = "Выберите файл картинки: ";
-			btn_submit.value = "Выполнять распознавание текста";
-			break;
-		case "deu":
-			title.innerHTML = "Online Texterkennung";
-			p_language.innerHTML = "Sprache: ";
-			p_select_img.innerHTML = "Bild auswählen: ";
-			btn_submit.value = "Texterkennung starten";
-			break;
-		case "ces":
-			title.innerHTML = "Online rozpoznávání textu";
-			p_language.innerHTML = "Jazyk: ";
-			p_select_img.innerHTML = "Vyberte soubor obrázku: ";
-			btn_submit.value = "Provést rozpoznání textu";
-			break;
-		default:
-			title.innerHTML = "Free online OCR";
-			p_language.innerHTML = "Language: ";
-			p_select_img.innerHTML = "Select image to upload: ";
-			btn_submit.value = "Do the OCR";
-			break;
-	}
-}
+			body {
+				height: 100vh;
+				overflow-y: hidden;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: #f5f5f5;
+			}
 
-switch(navigator.language || navigator.userLanguage){
-	case "ru":
-		select_lang.value = "rus";
-		break;
-	case "de":
-		select_lang.value = "deu";
-		break;
-	case "cs":
-		select_lang.value = "ces";
-		break;
-	default:
-		select_lang.value = "eng";
-		break;
-}
-reloadLang();
-</script>
-</body>
+			.container {
+				background: #fafafa;
+				text-align: center;
+				padding: 24px;
+				box-shadow: 0px 3px 5px rgba(0, 0, 0, .35);
+			}
+			
+			input, select {
+				margin: 10px 0;
+				text-align: center;
+			}
+
+			#p_select_img {
+				float: left;
+				display: inline;
+				margin: 0;
+			}
+
+			#image {
+				margin-bottom: 16px;
+			}
+
+			.language-container {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			input[type=submit] {
+				padding: 12px 6px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 id="title">Free online OCR</h1>
+			<form method="post" enctype="multipart/form-data">
+				<p id="p_select_img">Select image to upload: </p>
+				<br>
+				<input type="file" name="image" id="image"><br>
+				<div class="language-container">
+					<p id="p_language">Language:</p>
+					<select id="select_lang" onchange="reloadLang()" name="lang">
+						<option value="eng">ENG</option>
+						<option value="ces">CZ</option>
+						<option value="deu">DE</option>
+						<option value="rus">RU</option>
+					</select>
+				</div>
+				
+				<input id="btn_submit" type="submit" value="Upload Image" name="submit">
+			</form>
+		</div>
+		<script>
+		let title = document.getElementById("title");
+		let p_select_img = document.getElementById("p_select_img");
+		let p_language = document.getElementById("p_language");
+		let btn_submit = document.getElementById("btn_submit");
+		let select_lang = document.getElementById("select_lang");
+
+		function reloadLang(){
+			switch(select_lang.value){
+				case "rus":
+					title.innerHTML = "Онлайн распознавание текста";
+					p_language.innerHTML = "Язык: ";
+					p_select_img.innerHTML = "Выберите файл картинки: ";
+					btn_submit.value = "Выполнять распознавание текста";
+					break;
+				case "deu":
+					title.innerHTML = "Online Texterkennung";
+					p_language.innerHTML = "Sprache: ";
+					p_select_img.innerHTML = "Bild auswählen: ";
+					btn_submit.value = "Texterkennung starten";
+					break;
+				case "ces":
+					title.innerHTML = "Online rozpoznávání textu";
+					p_language.innerHTML = "Jazyk: ";
+					p_select_img.innerHTML = "Vyberte soubor obrázku: ";
+					btn_submit.value = "Provést rozpoznání textu";
+					break;
+				default:
+					title.innerHTML = "Free online OCR";
+					p_language.innerHTML = "Language: ";
+					p_select_img.innerHTML = "Select image to upload: ";
+					btn_submit.value = "Do the OCR";
+					break;
+			}
+		}
+
+		switch(navigator.language || navigator.userLanguage){
+			case "ru":
+				select_lang.value = "rus";
+				break;
+			case "de":
+				select_lang.value = "deu";
+				break;
+			case "cs":
+				select_lang.value = "ces";
+				break;
+			default:
+				select_lang.value = "eng";
+				break;
+		}
+		reloadLang();
+		</script>
+	</body>
 </html>
