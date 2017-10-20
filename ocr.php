@@ -52,6 +52,7 @@ die();
 		<option value="eng">ENG</option>
 		<option value="ces">CZ</option>
 		<option value="deu">DE</option>
+		<option value="rus">RU</option>
 	</select><br>
     <input id="btn_submit" type="submit" value="Upload Image" name="submit">
 </form>
@@ -64,6 +65,12 @@ let select_lang = document.getElementById("select_lang");
 
 function reloadLang(){
 	switch(select_lang.value){
+		case "rus":
+			title.innerHTML = "Онлайн распознавание текста";
+			p_language.innerHTML = "Язык: ";
+			p_select_img.innerHTML = "Выберите файл картинки: ";
+			btn_submit.value = "Выполнять распознавание текста";
+			break;
 		case "deu":
 			title.innerHTML = "Online Texterkennung";
 			p_language.innerHTML = "Sprache: ";
@@ -86,6 +93,9 @@ function reloadLang(){
 }
 
 switch(navigator.language || navigator.userLanguage){
+	case "ru":
+		select_lang.value = "rus";
+		break;
 	case "de":
 		select_lang.value = "deu";
 		break;
